@@ -2,14 +2,12 @@
 const express = require('express');
 const router = express.Router();
 
-/* router.get('/', ({ getAllIncomes }) => {
-  console.log(getAllIncomes)
-  console.log('inside route');
-  getAllIncomes;
+const container = require('./infrastructure/container');
+
+/* router.get('/', (req, res) => {
+  res.status(200).json({ message: 'Working' });
 }); */
 
-router.get('/', (req, res) => {
-  res.status(200).json({ message: 'Working' });
-});
+router.get('/', container.resolve('Incomes').getAllIncomes);
 
 module.exports = router;
