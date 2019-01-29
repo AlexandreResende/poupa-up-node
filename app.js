@@ -5,9 +5,6 @@ const helmet = require('helmet');
 
 const routes = require('./src/routes');
 
-/* const container = require('./src/infrastructure/container');
-const router = container.resolve('router'); */
-
 const port = process.env.PORT || 7777;
 const app = express();
 

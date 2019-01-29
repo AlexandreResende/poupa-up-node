@@ -4,10 +4,6 @@ const router = express.Router();
 
 const container = require('./infrastructure/container');
 
-/* router.get('/', (req, res) => {
-  res.status(200).json({ message: 'Working' });
-}); */
-
 router.get('/incomes/get-all-incomes', container.resolve('Incomes').getAllIncomes);
 router.get('/incomes/get-monthly-incomes', container.resolve('Incomes').getMonthlyIncomes);
 router.post('/incomes/create', container.resolve('Incomes').create);
