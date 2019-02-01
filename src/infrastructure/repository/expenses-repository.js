@@ -1,5 +1,7 @@
 module.exports = class Expenses {
-  constructor() {}
+  constructor({ knexInstance }) {
+    this.model = ExpensesModel.bindKnex(knexInstance);
+  }
 
   getAllIncomes() {}
 
