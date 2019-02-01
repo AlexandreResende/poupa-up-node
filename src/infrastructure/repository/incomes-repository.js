@@ -1,13 +1,39 @@
+
+const IncomesModel = require('../model/incomes');
+
 module.exports = class Incomes {
-  constructor() {}
+  constructor({ knexInstance }) {
+    this.model = IncomesModel.bindKnex(knexInstance);
+  }
 
-  getAllIncomes() {}
+  async getAllIncomes() {
+    const result = await this.model.query().where({});
 
-  getMonthlyIncomes() {}
+    return result;
+  }
 
-  create() {}
+  async getMonthlyIncomes(month, year) {
+    const result = await this.model.query().where({
+      month,
+      year,
+    });
+  }
 
-  update() {}
+  async create(IncomesData) {
+    const result = await this.model.query().insertAndFetch(IncomesData);
 
-  delete() {}
+    return result;
+  }
+
+  async update({ id, ...rest}) {
+    const result = await this.model.query().updateAndFetchById(id, rest);
+
+    return result;
+  }
+
+  async delete(id) {
+    const result = await this.model.query().deleteById(id);
+
+    return result;
+  }
 }
