@@ -10,7 +10,8 @@
     "migrate-remove": "knex --knexfile './src/infrastructure/config/knexfile.js' migrate:rollback",
     "migrate-run": "knex --knexfile './src/infrastructure/config/knexfile.js' migrate:latest",
     "seed-create": "knex --knexfile './src/infrastructure/config/knexfile.js' seed:make",
-    "seed-run": "knex --knexfile './src/infrastructure/config/knexfile.js' seed:run"
+    "seed-run": "knex --knexfile './src/infrastructure/config/knexfile.js' seed:run",
+    "db-all": "npm run migrate-run && npm run seed-run"
   },
   "repository": {
     "type": "git",
