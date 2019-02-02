@@ -3,7 +3,7 @@ module.exports = {
   development: {
     client: 'pg',
     connection: {
-      host: 'localhost',
+      host: process.env.DATABASE_URL || 'localhost',
       user: 'postgrestest',
       password: 'postgrestest',
       database: 'poupaup',
