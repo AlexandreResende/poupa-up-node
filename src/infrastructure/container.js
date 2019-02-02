@@ -10,12 +10,11 @@ const {
 const router = require('../routes');
 
 const { knexInstance } = require('./config/objection-setup');
-const { Model } = require('objection');
 
-const Incomes = require('../application/Incomes');
+const CreateIncomesCommand = require('../application/create-income-command');
 const Expenses = require('../application/Expenses');
 
-const IncomesRepository = require('./repository/incomes-repository');
+const Incomes = require('./repository/incomes-repository');
 const ExpensesRepository = require('./repository/expenses-repository');
 
 const container = createContainer({
@@ -28,14 +27,13 @@ container.register({
 
 // repositories
 container.register({
-  incomesRepository: asClass(IncomesRepository),
+  incomesRepository: asClass(Incomes),
   expensesRepository: asClass(ExpensesRepository),
 });
 
 // application layer
 container.register({
-  Incomes: asFunction(Incomes),
-  Expenses: asFunction(Expenses),
+  createIncomesCommand: asFunction(CreateIncomesCommand),
 });
 
 //other
