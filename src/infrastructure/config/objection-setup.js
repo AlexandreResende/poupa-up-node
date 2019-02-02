@@ -4,10 +4,12 @@ const { knexSnakeCaseMappers } = require('objection');
 
 const { postProcessResponse, wrapIdentifier } = knexSnakeCaseMappers();
 
-const database = require('./knex-configuration');
+const database = require('./knexfile');
+
+const env = process.env.environment || 'development';
 
 const objectionSettings = {
-  ...database,
+  ...database[env],
   postProcessResponse,
   wrapIdentifier,
 };
