@@ -5,7 +5,12 @@
   "main": "index.js",
   "scripts": {
     "start": "node start",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "migrate-make": "knex --knexfile './src/infrastructure/config/knexfile.js' migrate:make",
+    "migrate-remove": "knex --knexfile './src/infrastructure/config/knexfile.js' migrate:rollback",
+    "migrate-create": "knex --knexfile './src/infrastructure/config/knexfile.js' migrate:latest",
+    "seed-make": "knex --knexfile './src/infrastructure/config/knexfile.js' seed:make",
+    "seed-create": "knex --knexfile './src/infrastructure/config/knexfile.js' seed:run"
   },
   "repository": {
     "type": "git",
