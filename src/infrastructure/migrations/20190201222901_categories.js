@@ -2,7 +2,7 @@
 exports.up = function(knex, Promise) {
   return Promise.all([
     knex.schema.createTable('categories', (table) => {
-      table.string('id').primary();
+      table.uuid('id').primary();
       table.string('categoryName', 20);
     }),
   ]);
