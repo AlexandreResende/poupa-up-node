@@ -14,5 +14,16 @@ module.exports = class Incomes extends Model {
     this.lastUpdatedAt = new Date();
   }
 
-  static get relationMappings() {}
+  static get relationMappings() {
+    return {
+      category: {
+        relation: Model.HasOneRelation,
+        modelClass: require('./categories'),
+        join: {
+          to: 'incomes.categoryId',
+          from: 'categories.id',
+        }
+      }
+    }  
+  }
 }
