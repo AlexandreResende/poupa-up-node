@@ -1,6 +1,4 @@
 
-const uuid = require('uuid');
-
 const { Model } = require('objection');
 
 module.exports = class Incomes extends Model {
@@ -8,8 +6,11 @@ module.exports = class Incomes extends Model {
     return 'incomes';
   }
 
+  static get idColumn() {
+    return 'id';
+  }
+
   $beforeInsert() {
-    this.id = uuid();
     this.createdAt = new Date();
   }
 
@@ -19,12 +20,12 @@ module.exports = class Incomes extends Model {
 
   static get relationMappings() {
     return {
-      category: {
+      categoryInfo: {
         relation: Model.HasOneRelation,
         modelClass: require('./categories'),
         join: {
-          to: 'incomes.categoryId',
-          from: 'categories.id',
+          to: 'incomes.category',
+          from: 'categories.name',
         }
       }
     }  

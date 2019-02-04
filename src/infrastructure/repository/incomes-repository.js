@@ -19,8 +19,11 @@ module.exports = class Incomes {
     });
   }
 
-  async create(IncomesData) {
-    const result = await this.model.query().insertAndFetch(IncomesData);
+  async create(incomeData) {
+    console.log(IncomesModel);
+    console.log(this.model);
+    console.log('incomedata', incomeData);
+    const result = await this.model.query().insertAndFetch(incomeData);
 
     return result;
   }
