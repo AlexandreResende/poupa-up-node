@@ -6,13 +6,13 @@ exports.seed = function(knex, Promise) {
   return knex('categories').del().then(() => {
       // Inserts seed entries
       return knex('categories').insert([
-        { id: uuid(), categoryName: 'FOOD'},
-        { id: uuid(), categoryName: 'INCOME'},
-        { id: uuid(), categoryName: 'EXPENSES'},
-        { id: uuid(), categoryName: 'ENTERTAINMENT'},
-        { id: uuid(), categoryName: 'HEALTH'},
-        { id: uuid(), categoryName: 'TRANSPORTATION'},
-        { id: uuid(), categoryName: 'STUDY'},
+        { id: uuid(), name: 'FOOD'},
+        { id: uuid(), name: 'INCOME'},
+        { id: uuid(), name: 'EXPENSES'},
+        { id: uuid(), name: 'ENTERTAINMENT'},
+        { id: uuid(), name: 'HEALTH'},
+        { id: uuid(), name: 'TRANSPORTATION'},
+        { id: uuid(), name: 'STUDY'},
       ]);
     });
 };
