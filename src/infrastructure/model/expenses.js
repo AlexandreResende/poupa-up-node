@@ -16,12 +16,12 @@ module.exports = class Expenses extends Model {
 
   static get relationMappings() {
     return {
-      category: {
+      categoryInfo: {
         relation: Model.HasOneRelation,
         modelClass: require('./categories'),
         join: {
-          to: 'incomes.categoryId',
-          from: 'categories.id',
+          to: 'incomes.category',
+          from: 'categories.name',
         }
       }
     }  
