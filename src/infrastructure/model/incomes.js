@@ -1,4 +1,6 @@
 
+const uuid = require('uuid/v4');
+
 const { Model } = require('objection');
 
 module.exports = class Incomes extends Model {
@@ -6,11 +8,8 @@ module.exports = class Incomes extends Model {
     return 'incomes';
   }
 
-  static get idColumn() {
-    return 'id';
-  }
-
   $beforeInsert() {
+    this.id = uuid();
     this.createdAt = new Date();
   }
 

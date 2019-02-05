@@ -2,7 +2,7 @@
 exports.up = function(knex, Promise) {
   return Promise.all([
     knex.schema.createTable('incomes', (table) => {
-      table.increments('id').primary();
+      table.string('id').primary();
       table.string('month', 2);
       table.string('year', 4);
       table.string('category').references('categories.name');
