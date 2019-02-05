@@ -8,10 +8,11 @@ module.exports = function CreateIncomesCommand({ incomesRepository }) {
     execute: async ({ body }, res) => {
       try {
         const incomeEntity = new IncomesEntity(body);
-      // console.log(incomeEntity);
-      const createIncomesResult = await this.incomesRepository.create(body);
+        const createIncomeResult = await this.incomesRepository.create(incomeEntity);
 
-      res.status(200).send({ message: 'working' });
+        res.status(200).send({
+          result: createIncomeResult,
+        });
       } catch (error) {
         throw new Error(error);
       }
