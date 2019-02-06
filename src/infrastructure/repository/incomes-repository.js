@@ -1,4 +1,6 @@
 
+const _ = require('lodash');
+
 const IncomesModel = require('../model/incomes');
 
 module.exports = class Incomes {
@@ -6,23 +8,15 @@ module.exports = class Incomes {
     this.model = IncomesModel.bindKnex(knexInstance);
   }
 
-  async getAllIncomes() {
-    const result = await this.model.query().where({});
+  async getIncomes(whereData) {
+    const whereClauseInput = _.omitBy(whereData, _.isUndefined);
+
+    const result = await this.model.query().where(whereClauseInput);
 
     return result;
   }
 
-  async getMonthlyIncomes(month, year) {
-    const result = await this.model.query().where({
-      month,
-      year,
-    });
-  }
-
   async create(incomeData) {
-    console.log(IncomesModel);
-    console.log(this.model);
-    console.log('incomedata', incomeData);
     const result = await this.model.query().insertAndFetch(incomeData);
 
     return result;
