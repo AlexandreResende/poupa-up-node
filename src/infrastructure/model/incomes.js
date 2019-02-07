@@ -14,7 +14,7 @@ module.exports = class Incomes extends Model {
   }
 
   $beforeUpdate() {
-    this.lastUpdatedAt = new Date();
+    this.updatedAt = new Date();
   }
 
   static get relationMappings() {
