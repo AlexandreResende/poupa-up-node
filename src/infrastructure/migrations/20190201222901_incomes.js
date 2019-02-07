@@ -9,7 +9,7 @@ exports.up = function(knex, Promise) {
       table.text('description');
       table.decimal('value', 10);
       table.datetime('created_at');
-      table.datetime('updated_at');
+      table.datetime('last_updated_at');
     }),
   ]);
 };
