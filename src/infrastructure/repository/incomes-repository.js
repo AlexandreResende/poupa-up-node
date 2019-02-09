@@ -28,7 +28,7 @@ module.exports = class Incomes {
     return result;
   }
 
-  async delete(id) {
+  async delete({ id }) {
     const result = await this.model.query().deleteById(id);
 
     return result;
