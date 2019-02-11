@@ -14,6 +14,7 @@ const { knexInstance } = require('./config/objection-setup');
 const CreateExpenseCommand = require('../application/commands/create-expense-command');
 const CreateIncomesCommand = require('../application/commands/create-income-command');
 const GetIncomesCommand = require('../application/commands/get-incomes-command');
+const UpdateExpenseCommand = require('../application/commands/update-expense-command');
 const UpdateIncomeCommand = require('../application/commands/update-income-command');
 const DeleteIncomeCommand = require('../application/commands/delete-income-command');
 
@@ -40,6 +41,7 @@ container.register({
   createIncomesCommand: asFunction(CreateIncomesCommand),
   deleteIncomeCommand: asFunction(DeleteIncomeCommand),
   getIncomesCommand: asFunction(GetIncomesCommand),
+  updateExpenseCommand: asFunction(UpdateExpenseCommand),
   updateIncomeCommand: asFunction(UpdateIncomeCommand),
 });
 

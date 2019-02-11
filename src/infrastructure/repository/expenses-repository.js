@@ -26,7 +26,9 @@ module.exports = class Expenses {
   }
 
   async update({ id, ...rest}) {
-    const result = await this.model.query().updateAndFetchById(id, rest);
+    const result = await this.model
+      .query()
+      .updateAndFetchById(id, rest);
 
     return result;
   }
