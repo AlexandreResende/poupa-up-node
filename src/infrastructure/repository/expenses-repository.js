@@ -7,20 +7,26 @@ module.exports = class Expenses {
   }
 
   async getAllExpenses() {
-    const result = await this.model.query().where({});
+    const result = await this.model
+      .query()
+      .where({});
 
     return result;
   }
 
   async getMonthlyExpenses(month, year) {
-    const result = await this.model.query().where({
-      month,
-      year,
-    });
+    const result = await this.model
+      .query()
+      .where({
+        month,
+        year,
+      });
   }
 
   async create(expensesData) {
-    const result = await this.model.query().insertAndFetch(expensesData);
+    const result = await this.model
+      .query()
+      .insertAndFetch(expensesData);
 
     return result;
   }
@@ -34,7 +40,9 @@ module.exports = class Expenses {
   }
 
   async delete(id) {
-    const result = await this.model.query().deleteById(id);
+    const result = await this.model
+      .query()
+      .deleteById(id);
 
     return result;
   }
