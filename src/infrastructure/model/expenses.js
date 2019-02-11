@@ -23,7 +23,7 @@ module.exports = class Expenses extends Model {
         relation: Model.HasOneRelation,
         modelClass: require('./categories'),
         join: {
-          to: 'incomes.category',
+          to: 'expenses.category',
           from: 'categories.name',
         }
       }
