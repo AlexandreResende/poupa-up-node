@@ -6,23 +6,16 @@ module.exports = class Expenses {
     this.model = ExpensesModel.bindKnex(knexInstance);
   }
 
-  async getAllExpenses() {
+  async getExpenses(whereData) {
+    const inputWithoutUndefinedValues = _.omitBy(whereData, _.isUndefined);
+
     const result = await this.model
       .query()
-      .where({});
+      .where(inputWithoutUndefinedValues);
 
     return result;
   }
-
-  async getMonthlyExpenses(month, year) {
-    const result = await this.model
-      .query()
-      .where({
-        month,
-        year,
-      });
-  }
-
+  
   async create(expensesData) {
     const result = await this.model
       .query()

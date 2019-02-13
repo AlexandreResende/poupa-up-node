@@ -9,6 +9,7 @@ router.post('/incomes/create', container.resolve('createIncomesCommand').execute
 router.put('/incomes/update', container.resolve('updateIncomeCommand').execute);
 router.delete('/incomes/delete', container.resolve('deleteIncomeCommand').execute);
 
+router.get('/expenses/get-all-expenses', container.resolve('getExpensesCommand').execute);
 router.post('/expenses/create', container.resolve('createExpenseCommand').execute);
 router.put('/expenses/update', container.resolve('updateExpenseCommand').execute);
 /* router.get('/expenses/get-all-expenses', container.resolve('Expenses').getAllExpenses);
