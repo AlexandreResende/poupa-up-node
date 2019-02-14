@@ -17,6 +17,7 @@ const GetExpensesCommand = require('../application/commands/get-expenses-command
 const GetIncomesCommand = require('../application/commands/get-incomes-command');
 const UpdateExpenseCommand = require('../application/commands/update-expense-command');
 const UpdateIncomeCommand = require('../application/commands/update-income-command');
+const DeleteExpenseCommand = require('../application/commands/delete-expense-command');
 const DeleteIncomeCommand = require('../application/commands/delete-income-command');
 
 const Expenses = require('./repository/expenses-repository');
@@ -40,6 +41,7 @@ container.register({
 container.register({
   createExpenseCommand: asFunction(CreateExpenseCommand),
   createIncomesCommand: asFunction(CreateIncomesCommand),
+  deleteExpenseCommand: asFunction(DeleteExpenseCommand),
   deleteIncomeCommand: asFunction(DeleteIncomeCommand),
   getExpensesCommand: asFunction(GetExpensesCommand),
   getIncomesCommand: asFunction(GetIncomesCommand),

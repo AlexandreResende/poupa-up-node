@@ -32,7 +32,7 @@ module.exports = class Expenses {
     return result;
   }
 
-  async delete(id) {
+  async delete({ id }) {
     const result = await this.model
       .query()
       .deleteById(id);
