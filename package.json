@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node start",
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "migrate-create": "knex --knexfile './src/infrastructure/config/knexfile.js' migrate:make",
     "migrate-remove": "knex --knexfile './src/infrastructure/config/knexfile.js' migrate:rollback",
@@ -36,5 +36,12 @@
     "objection": "^1.5.3",
     "pg": "^7.8.0",
     "uuid": "^3.3.2"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "chai-http": "^4.2.1",
+    "mocha": "^5.2.0",
+    "sinon": "^7.2.3"
   }
 }
