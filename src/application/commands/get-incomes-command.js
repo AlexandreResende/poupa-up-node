@@ -6,16 +6,12 @@ module.exports = function GetIncomesCommand({ incomesRepository }) {
 
   return {
     execute: async ({ query }, res) => {
-      try {
-        const {month, year} = query;
-        const getIncomesResult = await this.incomesRepository.getIncomes({ month, year });
+      const {month, year} = query;
+      const getIncomesResult = await this.incomesRepository.getIncomes({ month, year });
 
-        res.status(200).send({
-          result: getIncomesResult,
-        });
-      } catch (error) {
-        throw new Error(error);
-      }
+      console.log(getIncomesResult);
+
+      return getIncomesResult;
     }
   }
 };

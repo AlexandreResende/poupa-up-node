@@ -2,9 +2,10 @@
 const express = require('express');
 const router = express.Router();
 
+const adapter = require('./interfaces/web/adatper');
 const container = require('./infrastructure/container');
 
-router.get('/incomes/get-incomes', container.resolve('getIncomesCommand').execute);
+router.get('/incomes/get-incomes', adapter('getIncomesCommand'));
 router.post('/incomes/create', container.resolve('createIncomesCommand').execute);
 router.put('/incomes/update', container.resolve('updateIncomeCommand').execute);
 router.delete('/incomes/delete', container.resolve('deleteIncomeCommand').execute);
