@@ -9,8 +9,6 @@ module.exports = function GetIncomesCommand({ incomesRepository }) {
       const {month, year} = query;
       const getIncomesResult = await this.incomesRepository.getIncomes({ month, year });
 
-      console.log(getIncomesResult);
-
       return getIncomesResult;
     }
   }

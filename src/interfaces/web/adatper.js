@@ -7,9 +7,6 @@ module.exports = function adapter(dependencyName) {
       const dependency = container.resolve(dependencyName);
       const result = await dependency.execute(request);
 
-      console.log('inside the adapter');
-      console.log(result);
-
       response.status(200).json({ result });
     } catch (error) {
       response.status(500).json({
