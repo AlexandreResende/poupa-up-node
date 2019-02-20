@@ -2,7 +2,7 @@
 const express = require('express');
 const router = express.Router();
 
-const adapter = require('./interfaces/web/adatper');
+const adapter = require('./interfaces/web/adapter');
 const container = require('./infrastructure/container');
 
 router.get('/incomes/get-incomes', adapter('getIncomesCommand'));
