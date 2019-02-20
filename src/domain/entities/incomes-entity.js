@@ -18,9 +18,6 @@ class IncomesEntity extends Model {
     super();
     const { value, error } = Joi.validate(data, schema, { abortEarly: true, stripUnknown: true });
 
-    console.log('-'.repeat(20), value);
-    console.log('-'.repeat(20), error);
-
     if (error) throw TypeError(error);
 
     Object.assign(this, data);

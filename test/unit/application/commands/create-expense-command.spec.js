@@ -26,8 +26,6 @@ describe('CreateExpenseCommand', () => {
     // when
     const result = await command.execute({ body: newExpense }, response);
 
-    console.log(result);
-
     expect(result).to.be.like(newExpense);
   });
 });

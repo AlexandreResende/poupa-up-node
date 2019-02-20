@@ -1,0 +1,37 @@
+
+const UpdateIncomesCommand = require('../../../../src/application/commands/update-income-command');
+
+const sinon = require('sinon');
+const uuid = require('uuid/v4');
+
+const { expect } = require('chai');
+
+describe('UpdateIncomeCommand', () => {
+  it('should return an updated income', async () => {
+    // given
+    const incomeId = uuid();
+    const newIncome = {
+      id: incomeId,
+      value: 500,
+      description: 'A test expense',
+      category: 'FOOD',
+      month: '05',
+      year: '2019',
+    };
+    const updatedData = {
+      id: incomeId,
+      value: 500,
+    };
+    const stubs = {
+      incomesRepository: {
+        update: sinon.stub().resolves(newIncome),
+      }
+    };
+    const command = new UpdateIncomesCommand(stubs);
+
+    // when
+    const result = await command.execute({ body: updatedData });
+
+    expect(result).to.be.deep.equal(newIncome);
+  });
+});

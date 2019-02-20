@@ -5,7 +5,7 @@ module.exports = function UpdateIncomeCommand({ incomesRepository }) {
   this.incomesRepository = incomesRepository;
 
   return {
-    execute: async ({ body }, res) => {
+    execute: async ({ body }) => {
       const incomeEntity = new IncomesEntity(body);
       const updateIncomeResult = await this.incomesRepository.update(incomeEntity);
 

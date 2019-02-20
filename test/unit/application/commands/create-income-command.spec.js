@@ -5,7 +5,7 @@ const sinon = require('sinon');
 
 const { expect } = require('chai');
 
-describe.only('CreateIncomeCommand', () => {
+describe('CreateIncomeCommand', () => {
   it('should return a new income', async () => {
     // given
     const newIncome = {
