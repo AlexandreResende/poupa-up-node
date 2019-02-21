@@ -24,8 +24,8 @@ describe('CreateExpenseCommand', () => {
     const command = new CreateExpenseCommand(stubs);
 
     // when
-    const result = await command.execute({ body: newExpense }, response);
+    const result = await command.execute({ body: newExpense });
 
-    expect(result).to.be.like(newExpense);
+    expect(result).to.be.deep.equal(newExpense);
   });
 });
