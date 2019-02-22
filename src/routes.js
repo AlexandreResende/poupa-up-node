@@ -8,7 +8,7 @@ const container = require('./infrastructure/container');
 router.get('/incomes/get-incomes', adapter('getIncomesCommand'));
 router.post('/incomes/create', adapter('createIncomesCommand'));
 router.put('/incomes/update', adapter('updateIncomeCommand'));
-router.delete('/incomes/delete', container.resolve('deleteIncomeCommand').execute);
+router.delete('/incomes/delete', adapter('deleteIncomeCommand'));
 
 router.get('/expenses/get-all-expenses', container.resolve('getExpensesCommand').execute);
 router.post('/expenses/create', adapter('createExpenseCommand'));

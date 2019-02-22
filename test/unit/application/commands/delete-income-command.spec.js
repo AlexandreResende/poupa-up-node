@@ -1,12 +1,12 @@
 
-const DeleteIncomesCommand = require('../../../../src/application/commands/delete-income-command');
+const DeleteIncomeCommand = require('../../../../src/application/commands/delete-income-command');
 
 const sinon = require('sinon');
 const uuid = require('uuid/v4');
 
 const { expect } = require('chai');
 
-describe('UpdateIncomeCommand', () => {
+describe('DeleteIncomeCommand', () => {
   it('should return an updated income', async () => {
     // given
     const incomeId = uuid();
@@ -22,7 +22,7 @@ describe('UpdateIncomeCommand', () => {
       }
     };
     const expectedResult = { ok: 1 };
-    const command = new DeleteIncomesCommand(stubs);
+    const command = new DeleteIncomeCommand(stubs);
 
     // when
     const result = await command.execute({ body: updatedData });
