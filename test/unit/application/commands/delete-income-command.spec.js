@@ -4,7 +4,7 @@ const DeleteIncomeCommand = require('../../../../src/application/commands/delete
 const sinon = require('sinon');
 const uuid = require('uuid/v4');
 
-const { expect } = require('chai');
+const { expect } = require('../../../assertion');
 
 describe('DeleteIncomeCommand', () => {
   it('should return an updated income', async () => {
@@ -27,6 +27,18 @@ describe('DeleteIncomeCommand', () => {
     // when
     const result = await command.execute({ body: updatedData });
 
+    // then
     expect(result).to.be.deep.equal(expectedResult);
+  });
+
+  it('should return a rejected promised when nothing is passed', async () => {
+    // given
+    const command = new DeleteIncomeCommand({});
+
+    // when
+    const result = command.execute({ });
+
+    // then
+    return expect(result).to.be.rejected;
   });
 });
