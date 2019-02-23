@@ -28,4 +28,15 @@ describe('CreateExpenseCommand', () => {
 
     expect(result).to.be.deep.equal(newExpense);
   });
+
+  it('should return a rejected promised when nothing is passed', async () => {
+    // given
+    const command = new CreateExpenseCommand({});
+
+    // when
+    const result = command.execute({ });
+
+    // then
+    return expect(result).to.be.rejected;
+  });
 });

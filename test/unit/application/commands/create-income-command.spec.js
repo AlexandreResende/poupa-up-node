@@ -27,4 +27,15 @@ describe('CreateIncomeCommand', () => {
 
     expect(result).to.be.deep.equal(newIncome);
   });
+
+  it('should return a rejected promised when nothing is passed', async () => {
+    // given
+    const command = new CreateIncomesCommand({});
+
+    // when
+    const result = command.execute({ });
+
+    // then
+    return expect(result).to.be.rejected;
+  });
 });
