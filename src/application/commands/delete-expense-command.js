@@ -6,15 +6,11 @@ module.exports = function DeleteExpenseCommand({ expensesRepository }) {
 
   return {
     execute: async ({ body }, res) => {
-      try {
-        const deleteExpenseResult = await this.expensesRepository.delete(body);
+      const deleteExpenseResult = await this.expensesRepository.delete(body);
 
-        res.status(200).send({
-          result: deleteExpenseResult,
-        });
-      } catch (error) {
-        throw new Error(error);
-      }
+      res.status(200).send({
+        result: deleteExpenseResult,
+      });
     }
   }
 };

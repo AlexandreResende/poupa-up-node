@@ -13,7 +13,7 @@ router.delete('/incomes/delete', adapter('deleteIncomeCommand'));
 router.get('/expenses/get-all-expenses', container.resolve('getExpensesCommand').execute);
 router.post('/expenses/create', adapter('createExpenseCommand'));
 router.put('/expenses/update', container.resolve('updateExpenseCommand').execute);
-router.delete('/expenses/delete', container.resolve('deleteExpenseCommand').execute);
+router.delete('/expenses/delete', adapter('deleteExpenseCommand'));
 
 
 module.exports = router;
