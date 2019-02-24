@@ -5,7 +5,7 @@ module.exports = function GetIncomesCommand({ incomesRepository }) {
   this.incomesRepository = incomesRepository;
 
   return {
-    execute: async ({ query }, res) => {
+    execute: async ({ query }) => {
       const {month, year} = query;
       const getIncomesResult = await this.incomesRepository.getIncomes({ month, year });
 
