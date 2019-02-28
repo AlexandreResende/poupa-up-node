@@ -8,9 +8,7 @@ module.exports = function DeleteExpenseCommand({ expensesRepository }) {
     execute: async ({ body }) => {
       const deleteExpenseResult = await this.expensesRepository.delete(body);
 
-      res.status(200).send({
-        result: deleteExpenseResult,
-      });
+      return deleteExpenseResult;
     }
   }
 };

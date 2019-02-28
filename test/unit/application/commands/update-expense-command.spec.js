@@ -6,7 +6,7 @@ const uuid = require('uuid/v4');
 
 const { expect } = require('chai');
 
-describe.only('UpdateIncomeCommand', () => {
+describe('UpdateExpenseCommand', () => {
   it('should return an updated income', async () => {
     // given
     const expenseId = uuid();
