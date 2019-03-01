@@ -1,10 +1,9 @@
 
-const CreateExpenseCommand = require('../../../../src/application/commands/create-expense-command');
+const CreateExpenseCommand = require('@root/application/commands/create-expense-command');
 
 const sinon = require('sinon');
 
 const { expect } = require('chai');
-const { response } = require('stream');
 
 describe('CreateExpenseCommand', () => {
   it('should return a new expense', async () => {
