@@ -1,5 +1,5 @@
 
-const DeleteIncomeCommand = require('../../../../src/application/commands/delete-income-command');
+const DeleteIncomeCommand = require('@root/application/commands/delete-income-command');
 
 const sinon = require('sinon');
 const uuid = require('uuid/v4');

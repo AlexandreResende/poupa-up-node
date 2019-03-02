@@ -1,5 +1,5 @@
 
-const CreateIncomesCommand = require('../../../../src/application/commands/create-income-command');
+const CreateIncomesCommand = require('@root/application/commands/create-income-command');
 
 const sinon = require('sinon');
 

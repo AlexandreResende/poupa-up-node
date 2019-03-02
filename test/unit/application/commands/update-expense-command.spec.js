@@ -1,5 +1,5 @@
 
-const UpdateExpenseCommand = require('../../../../src/application/commands/update-expense-command');
+const UpdateExpenseCommand = require('@root/application/commands/update-expense-command');
 
 const sinon = require('sinon');
 const uuid = require('uuid/v4');

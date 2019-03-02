@@ -1,5 +1,5 @@
 
-const DeleteExpenseCommand = require('../../../../src/application/commands/delete-expense-command');
+const DeleteExpenseCommand = require('@root/application/commands/delete-expense-command');
 
 const sinon = require('sinon');
 const uuid = require('uuid/v4');

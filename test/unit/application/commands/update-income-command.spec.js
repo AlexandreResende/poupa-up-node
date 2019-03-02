@@ -1,5 +1,5 @@
 
-const UpdateIncomesCommand = require('../../../../src/application/commands/update-income-command');
+const UpdateIncomesCommand = require('@root/application/commands/update-income-command');
 
 const sinon = require('sinon');
 const uuid = require('uuid/v4');

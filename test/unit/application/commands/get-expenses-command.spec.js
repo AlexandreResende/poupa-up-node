@@ -1,5 +1,5 @@
 
-const GetExpensesCommand = require('../../../../src/application/commands/get-expenses-command');
+const GetExpensesCommand = require('@root/application/commands/get-expenses-command');
 
 const sinon = require('sinon');
 
