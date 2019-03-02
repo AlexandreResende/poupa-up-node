@@ -1,5 +1,5 @@
 
-const ExpensesEntity = require('../../domain/entities/expenses-entity');
+const ExpensesEntity = require('@root/domain/entities/expenses-entity');
 
 module.exports = function GetExpensesCommand({ expensesRepository }) {
   this.expensesRepository = expensesRepository;

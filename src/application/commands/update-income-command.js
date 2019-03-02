@@ -1,5 +1,5 @@
 
-const IncomesEntity = require('../../domain/entities/incomes-entity');
+const IncomesEntity = require('@root/domain/entities/incomes-entity');
 
 module.exports = function UpdateIncomeCommand({ incomesRepository }) {
   this.incomesRepository = incomesRepository;

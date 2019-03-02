@@ -1,6 +1,4 @@
 
-const ExpensesEntity = require('../../domain/entities/expenses-entity');
-
 module.exports = function DeleteExpenseCommand({ expensesRepository }) {
   this.expensesRepository = expensesRepository;
 
