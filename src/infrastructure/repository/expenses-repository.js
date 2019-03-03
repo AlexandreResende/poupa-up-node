@@ -1,4 +1,6 @@
 
+const _ = require('lodash');
+
 const ExpensesModel = require('../model/expenses');
 
 module.exports = class Expenses {
@@ -7,6 +9,7 @@ module.exports = class Expenses {
   }
 
   async getExpenses(whereData) {
+    console.log(whereData);
     const inputWithoutUndefinedValues = _.omitBy(whereData, _.isUndefined);
 
     const result = await this.model
