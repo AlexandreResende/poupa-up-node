@@ -25,10 +25,10 @@ describe('GetIncomesCommand', () => {
     const query = {};
     const stubs = {
       incomesRepository: {
-        getIncomes: sinon.stub().resolves([newIncome, anotherIncome]),
+        getIncomes: sinon.stub().resolves({ result: [newIncome, anotherIncome] }),
       }
     };
-    const expectedResult = [newIncome, anotherIncome];
+    const expectedResult = { result: [newIncome, anotherIncome] };
     const command = new GetIncomesCommand(stubs);
 
     // when

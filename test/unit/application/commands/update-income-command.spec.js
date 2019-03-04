@@ -24,15 +24,16 @@ describe('UpdateIncomeCommand', () => {
     };
     const stubs = {
       incomesRepository: {
-        update: sinon.stub().resolves(newIncome),
+        update: sinon.stub().resolves({ result: newIncome }),
       }
     };
+    const expectedResult = { result: newIncome };
     const command = new UpdateIncomesCommand(stubs);
 
     // when
     const result = await command.execute({ body: updatedData });
 
-    expect(result).to.be.deep.equal(newIncome);
+    expect(result).to.be.deep.equal(expectedResult);
   });
 
   it('should return a rejected promised when nothing is passed', async () => {

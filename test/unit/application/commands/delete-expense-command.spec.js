@@ -11,7 +11,7 @@ describe('DeleteExpenseCommand', () => {
     // given
     const incomeId = uuid();
     const deleteExpenseReturn = {
-      ok: 1,
+      result: 1,
     };
     const updatedData = {
       id: incomeId,
@@ -21,7 +21,7 @@ describe('DeleteExpenseCommand', () => {
         delete: sinon.stub().resolves(deleteExpenseReturn),
       }
     };
-    const expectedResult = { ok: 1 };
+    const expectedResult = { result: 1 };
     const command = new DeleteExpenseCommand(stubs);
 
     // when

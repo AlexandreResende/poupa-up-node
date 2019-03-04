@@ -25,10 +25,10 @@ describe('GetExpensesCommand', () => {
     const query = {};
     const stubs = {
       expensesRepository: {
-        getExpenses: sinon.stub().resolves([newExpense, anotherExpense]),
+        getExpenses: sinon.stub().resolves({ result: [newExpense, anotherExpense] }),
       }
     };
-    const expectedResult = [newExpense, anotherExpense];
+    const expectedResult = { result: [newExpense, anotherExpense] };
     const command = new GetExpensesCommand(stubs);
 
     // when
@@ -51,10 +51,10 @@ describe('GetExpensesCommand', () => {
     const query = { month, year };
     const stubs = {
       expensesRepository: {
-        getExpenses: sinon.stub().resolves([newExpense]),
+        getExpenses: sinon.stub().resolves({ result: [newExpense] }),
       }
     };
-    const expectedResult = [newExpense];
+    const expectedResult = { result: [newExpense] };
     const command = new GetExpensesCommand(stubs);
 
     // when

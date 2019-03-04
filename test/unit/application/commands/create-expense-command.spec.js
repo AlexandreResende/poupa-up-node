@@ -17,15 +17,16 @@ describe('CreateExpenseCommand', () => {
     };
     const stubs = {
       expensesRepository: {
-        create: sinon.stub().resolves(newExpense),
+        create: sinon.stub().resolves({ result: newExpense }),
       }
     };
+    const expectedResult = { result: newExpense };
     const command = new CreateExpenseCommand(stubs);
 
     // when
     const result = await command.execute({ body: newExpense });
 
-    expect(result).to.be.deep.equal(newExpense);
+    expect(result).to.be.deep.equal(expectedResult);
   });
 
   it('should return a rejected promised when nothing is passed', async () => {

@@ -9,7 +9,6 @@ module.exports = class Expenses {
   }
 
   async getExpenses(whereData) {
-    console.log(whereData);
     const inputWithoutUndefinedValues = _.omitBy(whereData, _.isUndefined);
 
     const result = await this.model
