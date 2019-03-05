@@ -17,3 +17,5 @@ You can find a version of this backend written in Typescript [here](https://gith
 The architecture of the project is DDD. However it is not fully implemented yet.
 After getting more time I will try to explain step by step how the architecture
 works and the reasons why it is being implemented the way it is.
+
+# Application hosted on heroku
