@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npm run postinstall && nodemon app.js",
+    "start": "npm run postinstall && node app.js",
     "test": "npm run postinstall && mocha test/**/*.js",
     "migrate-create": "knex --knexfile './src/infrastructure/config/knexfile.js' migrate:make",
     "migrate-remove": "knex --knexfile './src/infrastructure/config/knexfile.js' migrate:rollback",
