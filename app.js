@@ -4,7 +4,7 @@ const cors = require('cors');
 const express = require('express');
 const helmet = require('helmet');
 
-const routes = require('./app/src/routes');
+const routes = require('./src/routes');
 
 const port = process.env.PORT || 7777;
 const app = express();

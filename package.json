@@ -6,17 +6,17 @@
   "scripts": {
     "start": "npm run postinstall && node app.js",
     "test": "npm run postinstall && mocha test/**/*.js",
-    "migrate-create": "knex --knexfile './app/src/infrastructure/config/knexfile.js' migrate:make",
-    "migrate-remove": "knex --knexfile './app/src/infrastructure/config/knexfile.js' migrate:rollback",
-    "migrate-run": "knex --knexfile './app/src/infrastructure/config/knexfile.js' migrate:latest",
-    "seed-create": "knex --knexfile './app/src/infrastructure/config/knexfile.js' seed:make",
-    "seed-run": "knex --knexfile './app/src/infrastructure/config/knexfile.js' seed:run",
+    "migrate-create": "knex --knexfile './src/infrastructure/config/knexfile.js' migrate:make",
+    "migrate-remove": "knex --knexfile './src/infrastructure/config/knexfile.js' migrate:rollback",
+    "migrate-run": "knex --knexfile './src/infrastructure/config/knexfile.js' migrate:latest",
+    "seed-create": "knex --knexfile './src/infrastructure/config/knexfile.js' seed:make",
+    "seed-run": "knex --knexfile './src/infrastructure/config/knexfile.js' seed:run",
     "db-all": "npm run migrate-run && npm run seed-run",
     "postinstall": "link-module-alias",
     "preinstall": "command -v link-module-alias && link-module-alias clean || true"
   },
   "_moduleAliases": {
-    "@root"      : "./app/src/"
+    "@root"      : "./src/"
   },
   "repository": {
     "type": "git",
