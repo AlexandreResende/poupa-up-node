@@ -19,10 +19,7 @@ module.exports = {
   production: {
     client: process.env.DB_CLIENT || 'pg',
     connection: {
-      host: process.env.DATABASE_URL || 'localhost',
-      user: 'postgrestest',
-      password: 'postgrestest',
-      database: 'poupaup',
+      host: process.env.DATABASE_URL,
     },
     debug: false,
     migrations: {
