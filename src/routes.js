@@ -3,7 +3,8 @@ const express = require('express');
 const router = express.Router();
 
 const adapter = require('./interfaces/web/adapter');
-const container = require('./infrastructure/container');
+
+router.get('/healthcheck', adapter('healthcheckCommand'));
 
 router.get('/incomes/get-incomes', adapter('getIncomesCommand'));
 router.post('/incomes/create', adapter('createIncomesCommand'));
