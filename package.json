@@ -18,7 +18,8 @@
     "heroku-postbuild": "npm install && npm run db-all"
   },
   "_moduleAliases": {
-    "@root": "./src/"
+    "@root": "./src/",
+    "@test": "./test/"
   },
   "repository": {
     "type": "git",
