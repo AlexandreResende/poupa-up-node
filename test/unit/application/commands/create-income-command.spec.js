@@ -3,7 +3,7 @@ const CreateIncomesCommand = require('@root/application/commands/create-income-c
 
 const sinon = require('sinon');
 
-const { expect } = require('chai');
+const { expect } = require('@test/assertion');
 
 describe('CreateIncomeCommand', () => {
   it('should return a new income', async () => {

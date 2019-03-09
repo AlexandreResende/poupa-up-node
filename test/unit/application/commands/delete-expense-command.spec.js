@@ -4,7 +4,7 @@ const DeleteExpenseCommand = require('@root/application/commands/delete-expense-
 const sinon = require('sinon');
 const uuid = require('uuid/v4');
 
-const { expect } = require('../../../assertion');
+const { expect } = require('@test/assertion');
 
 describe('DeleteExpenseCommand', () => {
   it('should return an object with key ok and value 1', async () => {

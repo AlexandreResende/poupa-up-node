@@ -3,7 +3,7 @@ const CreateExpenseCommand = require('@root/application/commands/create-expense-
 
 const sinon = require('sinon');
 
-const { expect } = require('chai');
+const { expect } = require('@test/assertion');
 
 describe('CreateExpenseCommand', () => {
   it('should return a new expense', async () => {

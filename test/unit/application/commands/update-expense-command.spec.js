@@ -4,7 +4,7 @@ const UpdateExpenseCommand = require('@root/application/commands/update-expense-
 const sinon = require('sinon');
 const uuid = require('uuid/v4');
 
-const { expect } = require('chai');
+const { expect } = require('@test/assertion');
 
 describe('UpdateExpenseCommand', () => {
   it('should return an updated income', async () => {

@@ -3,7 +3,7 @@ const GetIncomesCommand = require('@root/application/commands/get-incomes-comman
 
 const sinon = require('sinon');
 
-const { expect } = require('chai');
+const { expect } = require('@test/assertion');
 
 describe('GetIncomesCommand', () => {
   it('should return all incomes from the database', async () => {

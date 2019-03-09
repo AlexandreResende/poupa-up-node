@@ -3,7 +3,7 @@ const GetExpensesCommand = require('@root/application/commands/get-expenses-comm
 
 const sinon = require('sinon');
 
-const { expect } = require('chai');
+const { expect } = require('@test/assertion');
 
 describe('GetExpensesCommand', () => {
   it('should return all expenses from the database', async () => {

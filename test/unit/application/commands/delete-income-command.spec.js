@@ -4,7 +4,7 @@ const DeleteIncomeCommand = require('@root/application/commands/delete-income-co
 const sinon = require('sinon');
 const uuid = require('uuid/v4');
 
-const { expect } = require('../../../assertion');
+const { expect } = require('@test/assertion');
 
 describe('DeleteIncomeCommand', () => {
   it('should return an updated income', async () => {
