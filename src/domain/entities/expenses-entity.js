@@ -4,11 +4,11 @@ const Joi = require('joi');
 const { Model } = require('objection');
 
 const schema = Joi.object().keys({
-  value: Joi.number(),
-	description: Joi.string().max(255),
-	category: Joi.string().max(20),
-	month: Joi.string().max(2),
-  year: Joi.string().max(4),
+  value: Joi.number().required(),
+	description: Joi.string().max(255).optional(),
+	category: Joi.string().max(20).required(),
+	month: Joi.string().max(2).required(),
+  year: Joi.string().max(4).required(),
   createdAt: Joi.date(),
   updatedAt: Joi.date().allow(null),
 });
