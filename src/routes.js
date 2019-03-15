@@ -4,10 +4,12 @@ const router = express.Router();
 
 const adapter = require('./interfaces/web/adapter');
 
+const createIncomeMiddleware = require('@root/interfaces/web/resources/create-income-middleware');
+
 router.get('/healthcheck', adapter('healthcheckCommand'));
 
 router.get('/incomes/get-incomes', adapter('getIncomesCommand'));
-router.post('/incomes/create', adapter('createIncomesCommand'));
+router.post('/incomes/create', createIncomeMiddleware, adapter('createIncomesCommand'));
 router.put('/incomes/update', adapter('updateIncomeCommand'));
 router.delete('/incomes/delete', adapter('deleteIncomeCommand'));
 
