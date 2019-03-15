@@ -11,6 +11,7 @@ const router = require('../routes');
 
 const { knexInstance } = require('./config/objection-setup');
 
+// commands
 const CreateExpenseCommand = require('../application/commands/create-expense-command');
 const CreateIncomesCommand = require('../application/commands/create-income-command');
 const GetExpensesCommand = require('../application/commands/get-expenses-command');
@@ -20,6 +21,9 @@ const UpdateExpenseCommand = require('../application/commands/update-expense-com
 const UpdateIncomeCommand = require('../application/commands/update-income-command');
 const DeleteExpenseCommand = require('../application/commands/delete-expense-command');
 const DeleteIncomeCommand = require('../application/commands/delete-income-command');
+
+// middlewares
+const CreateIncomeMiddleware = require('@root/interfaces/web/resources/create-income-middleware');
 
 const Expenses = require('./repository/expenses-repository');
 const Incomes = require('./repository/incomes-repository');
@@ -49,6 +53,11 @@ container.register({
   healthcheckCommand: asFunction(HealthcheckCommand),
   updateExpenseCommand: asFunction(UpdateExpenseCommand),
   updateIncomeCommand: asFunction(UpdateIncomeCommand),
+});
+
+// middlewares
+container.register({
+  createIncomeMiddleware: asFunction(CreateIncomeMiddleware),
 });
 
 //other

@@ -4,7 +4,7 @@ const app = require('@app/app.js');
 
 describe('Integration Test', () => {
   describe('Create income route', () => {
-    it('should create a person', async () => {
+    it('should create a income', async () => {
       // given
       const income = {
         category: 'FOOD',
@@ -39,9 +39,9 @@ describe('Integration Test', () => {
         .send(income);
 
       // then
-      expect(response.status).to.be.equal(500);
+      expect(response.status).to.be.equal(400);
       expect(response).to.be.json;
-      expect(response.error.text).to.be.like(JSON.stringify(expectedResult));
+      expect(response).to.throw;
     });
   });
 });

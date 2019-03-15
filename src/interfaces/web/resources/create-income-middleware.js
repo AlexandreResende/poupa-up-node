@@ -12,7 +12,7 @@ const schema = Joi.object().keys({
 module.exports = function createIncomeMiddleware(req, res, next) {
   const { body } = req;
   const { error, value } = Joi.validate(body, schema, { abortEarly: true, stripUnknown: true });
-  console.log('INSIDE THE MIDDLEWARE!!!');
+
   if (error) {
     return res.status(400).json({
       error: `Missing parameters for income creation`,
