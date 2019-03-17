@@ -2,7 +2,7 @@
 const { expect, request } = require('@test/assertion');
 const app = require('@app/app.js');
 
-describe.only('Integration Test', () => {
+describe('Integration Test', () => {
   describe('Get incomes route', () => {
     it('should delete an existing income', async () => {
       // given

@@ -1,10 +1,49 @@
 
 const { expect, request } = require('@test/assertion');
-const app = require('@app/app.js');
+
+const faker = require('faker');
+const knex = require('knex');
+
+const TestDatabase = require('@root/infrastructure/config/database');
+const { objectionSettings } = require('@root/infrastructure/config/objection-setup');
+
+let knexInstance;
+let testDb;
+
+async function prepareEnvironment() {
+  process.env.DATABASE_NAME = `poupaup_test_${faker.random.uuid()}`.replace(/-/g, '');
+
+  delete require.cache['/project/src/routes.js'];
+  delete require.cache['/project/src/interfaces/web/adapter.js'];
+  delete require.cache['/project/src/infrastructure/container.js'];
+  delete require.cache['/project/src/infrastructure/config/objection-setup.js'];
+  delete require.cache['/project/src/infrastructure/config/knexfile.js'];
+
+  testDb = new TestDatabase();
+  testDb.databaseName = process.env.DATABASE_NAME;
+  await testDb.setup();
+
+  objectionSettings.connection.database = testDb.databaseName;
+
+  console.log('objection settings');
+  console.log(objectionSettings);
+
+  knexInstance = knex(objectionSettings);
+}
+
+async function tearDownEnvironment() {
+  await knexInstance.destroy();
+  await testDb.teardown();
+}
 
 describe('Integration Test', () => {
   describe('Create income route', () => {
-    it('should create a income', async () => {
+
+    beforeEach(prepareEnvironment);
+
+    // afterEach(tearDownEnvironment);
+
+    it.only('should create a income', async () => {
       // given
       const income = {
         category: 'FOOD',
@@ -16,8 +55,10 @@ describe('Integration Test', () => {
       const endpoint = '/incomes/create';
       const expectedResult = { result: income };
 
+      // await knexInstance('incomes').insert({ ...income, id: faker.random.uuid() });
+
       // when
-      const response = await request(app)
+      const response = await request()
         .post(endpoint)
         .send(income);
 
@@ -31,10 +72,9 @@ describe('Integration Test', () => {
       // given
       const income = {};
       const endpoint = '/incomes/create';
-      const expectedResult = { error: 'ValidationError: child "value" fails because ["value" is required]' };
 
       // when
-      const response = await request(app)
+      const response = await request()
         .post(endpoint)
         .send(income);
 
