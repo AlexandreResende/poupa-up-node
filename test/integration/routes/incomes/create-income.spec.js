@@ -2,9 +2,32 @@
 const { expect, request } = require('@test/assertion');
 const app = require('@app/app.js');
 
+const knex = require('knex');
+
+const { objectionSettings } = require('@root/infrastructure/config/objection-setup');
+
+let knexInstance;
+let testDb;
+
+async function prepareEnvironment() {
+  knexInstance = knex(objectionSettings);
+  await knexInstance.migrate.latest();
+  await knexInstance.seed.run();
+}
+
+async function tearDownEnvironment() {
+  await knexInstance.destroy();
+  await testDb.teardown();
+}
+
 describe('Integration Test', () => {
   describe('Create income route', () => {
-    it('should create a income', async () => {
+
+    beforeEach(prepareEnvironment);
+
+    // afterEach(tearDownEnvironment);
+
+    it.only('should create a income', async () => {
       // given
       const income = {
         category: 'FOOD',

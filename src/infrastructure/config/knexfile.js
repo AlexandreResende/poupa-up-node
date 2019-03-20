@@ -10,10 +10,10 @@ module.exports = {
     },
     debug: false,
     migrations: {
-      directory: '../migrations'
+      directory: './src/infrastructure/migrations'
     },
     seeds: {
-      directory: '../seeds'
+      directory: './src/infrastructure/seeds'
     }
   },
   development: {
