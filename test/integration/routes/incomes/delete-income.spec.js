@@ -1,13 +1,37 @@
 
 const { expect, request } = require('@test/assertion');
+
+const faker = require('faker');
+
 const app = require('@app/app.js');
+
+const knex = require('knex');
+
+const { objectionSettings } = require('@root/infrastructure/config/objection-setup');
+
+let knexInstance;
+
+async function prepareEnvironment() {
+  knexInstance = knex(objectionSettings);
+  await knexInstance.migrate.latest();
+  await knexInstance.seed.run();
+}
+
+async function tearDownEnvironment() {
+  await knexInstance.migrate.rollback();
+}
 
 describe('Integration Test', () => {
   describe('Delete income route', () => {
+
+    beforeEach(prepareEnvironment);
+
+    afterEach(tearDownEnvironment);
+
     it('should delete an existing income', async () => {
       // given
-      const createEndpoint = '/incomes/create';
       const deleteEndpoint = '/incomes/delete';
+      const incomeId = faker.random.uuid();
       const income = {
         category: 'FOOD',
         description: 'Padaria',
@@ -16,9 +40,9 @@ describe('Integration Test', () => {
         year: '2019',
       };
 
-      const { body: { result: { id } } } = await request(app).post(createEndpoint).send(income);
+      await knexInstance('incomes').insert({ id: incomeId, ...income });
 
-      const deletedIncome = { id };
+      const deletedIncome = { id: incomeId };
       const expectedResult = { result: 1 };
 
       // when

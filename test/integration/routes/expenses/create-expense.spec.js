@@ -2,8 +2,29 @@
 const { expect, request } = require('@test/assertion');
 const app = require('@app/app.js');
 
+const knex = require('knex');
+
+const { objectionSettings } = require('@root/infrastructure/config/objection-setup');
+
+let knexInstance;
+
+async function prepareEnvironment() {
+  knexInstance = knex(objectionSettings);
+  await knexInstance.migrate.latest();
+  await knexInstance.seed.run();
+}
+
+async function tearDownEnvironment() {
+  await knexInstance.migrate.rollback();
+}
+
 describe('Integration Test', () => {
   describe('Create expense route', () => {
+
+    beforeEach(prepareEnvironment);
+
+    afterEach(tearDownEnvironment);
+
     it('should create a expense', async () => {
       // given
       const expense = {

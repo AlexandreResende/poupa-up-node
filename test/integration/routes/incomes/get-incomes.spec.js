@@ -2,11 +2,33 @@
 const { expect, request } = require('@test/assertion');
 const app = require('@app/app.js');
 
+const faker = require('faker');
+
+const knex = require('knex');
+
+const { objectionSettings } = require('@root/infrastructure/config/objection-setup');
+
+let knexInstance;
+
+async function prepareEnvironment() {
+  knexInstance = knex(objectionSettings);
+  await knexInstance.migrate.latest();
+  await knexInstance.seed.run();
+}
+
+async function tearDownEnvironment() {
+  await knexInstance.migrate.rollback();
+}
+
 describe('Integration Test', () => {
   describe('Get incomes route', () => {
+
+    beforeEach(prepareEnvironment);
+
+    afterEach(tearDownEnvironment);
+
     it('should delete an existing income', async () => {
       // given
-      const createEndpoint = '/incomes/create';
       const getIncomesEndpoint = '/incomes/get-incomes';
       const income = {
         category: 'FOOD',
@@ -17,9 +39,9 @@ describe('Integration Test', () => {
       };
       const expectedLength = 3;
 
-      await request(app).post(createEndpoint).send(income);
-      await request(app).post(createEndpoint).send({ ...income, month: '06' });
-      await request(app).post(createEndpoint).send({ ...income, month: '07' });
+      await knexInstance('incomes').insert({ id: faker.random.uuid(), ...income });
+      await knexInstance('incomes').insert({ id: faker.random.uuid(), ...income, month: '06' });
+      await knexInstance('incomes').insert({ id: faker.random.uuid(), ...income, month: '07' });
 
       // when
       const response = await request(app)
@@ -33,7 +55,6 @@ describe('Integration Test', () => {
 
     it('should return specific incomes of a determined month and year', async () => {
       // given
-      const createEndpoint = '/incomes/create';
       const getIncomesEndpoint = '/incomes/get-incomes?month=11&year=2019';
       const income = {
         category: 'FOOD',
@@ -44,9 +65,9 @@ describe('Integration Test', () => {
       };
       const expectedLength = 1;
 
-      await request(app).post(createEndpoint).send(income);
-      await request(app).post(createEndpoint).send({ ...income, month: '06' });
-      await request(app).post(createEndpoint).send({ ...income, month: '11' });
+      await knexInstance('incomes').insert({ id: faker.random.uuid(), ...income });
+      await knexInstance('incomes').insert({ id: faker.random.uuid(), ...income, month: '06' });
+      await knexInstance('incomes').insert({ id: faker.random.uuid(), ...income, month: '11' });
 
       // when
       const response = await request(app)

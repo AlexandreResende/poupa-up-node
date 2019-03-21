@@ -7,7 +7,6 @@ const knex = require('knex');
 const { objectionSettings } = require('@root/infrastructure/config/objection-setup');
 
 let knexInstance;
-let testDb;
 
 async function prepareEnvironment() {
   knexInstance = knex(objectionSettings);
@@ -16,8 +15,7 @@ async function prepareEnvironment() {
 }
 
 async function tearDownEnvironment() {
-  await knexInstance.destroy();
-  await testDb.teardown();
+  await knexInstance.migrate.rollback();
 }
 
 describe('Integration Test', () => {
@@ -25,9 +23,9 @@ describe('Integration Test', () => {
 
     beforeEach(prepareEnvironment);
 
-    // afterEach(tearDownEnvironment);
+    afterEach(tearDownEnvironment);
 
-    it.only('should create a income', async () => {
+    it('should create a income', async () => {
       // given
       const income = {
         category: 'FOOD',
@@ -54,7 +52,6 @@ describe('Integration Test', () => {
       // given
       const income = {};
       const endpoint = '/incomes/create';
-      const expectedResult = { error: 'ValidationError: child "value" fails because ["value" is required]' };
 
       // when
       const response = await request(app)

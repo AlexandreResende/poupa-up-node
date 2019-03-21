@@ -2,11 +2,33 @@
 const { expect, request } = require('@test/assertion');
 const app = require('@app/app.js');
 
+const faker = require('faker');
+
+const knex = require('knex');
+
+const { objectionSettings } = require('@root/infrastructure/config/objection-setup');
+
+let knexInstance;
+
+async function prepareEnvironment() {
+  knexInstance = knex(objectionSettings);
+  await knexInstance.migrate.latest();
+  await knexInstance.seed.run();
+}
+
+async function tearDownEnvironment() {
+  await knexInstance.migrate.rollback();
+}
+
 describe('Integration Test', () => {
   describe('Get expenses route', () => {
+
+    beforeEach(prepareEnvironment);
+
+    afterEach(tearDownEnvironment);
+
     it('should get all expenses', async () => {
       // given
-      const createEndpoint = '/expenses/create';
       const getExpensesEndpoint = '/expenses/get-expenses';
       const expense = {
         category: 'FOOD',
@@ -17,9 +39,9 @@ describe('Integration Test', () => {
       };
       const expectedLength = 3;
 
-      await request(app).post(createEndpoint).send(expense);
-      await request(app).post(createEndpoint).send({ ...expense, month: '06' });
-      await request(app).post(createEndpoint).send({ ...expense, month: '07' });
+      await knexInstance('expenses').insert({ id: faker.random.uuid(), ...expense });
+      await knexInstance('expenses').insert({ id: faker.random.uuid(), ...expense, month: '06' });
+      await knexInstance('expenses').insert({ id: faker.random.uuid(), ...expense, month: '07' });
 
       // when
       const response = await request(app)
@@ -44,9 +66,9 @@ describe('Integration Test', () => {
       };
       const expectedLength = 1;
 
-      await request(app).post(createEndpoint).send(expense);
-      await request(app).post(createEndpoint).send({ ...expense, month: '06' });
-      await request(app).post(createEndpoint).send({ ...expense, month: '11' });
+      await knexInstance('expenses').insert({ id: faker.random.uuid(), ...expense });
+      await knexInstance('expenses').insert({ id: faker.random.uuid(), ...expense, month: '06' });
+      await knexInstance('expenses').insert({ id: faker.random.uuid(), ...expense, month: '11' });
 
       // when
       const response = await request(app)

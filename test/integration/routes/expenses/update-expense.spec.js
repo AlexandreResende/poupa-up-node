@@ -2,11 +2,34 @@
 const { expect, request } = require('@test/assertion');
 const app = require('@app/app.js');
 
-describe.only('Integration Test', () => {
+const faker = require('faker');
+
+const knex = require('knex');
+
+const { objectionSettings } = require('@root/infrastructure/config/objection-setup');
+
+let knexInstance;
+
+async function prepareEnvironment() {
+  knexInstance = knex(objectionSettings);
+  await knexInstance.migrate.latest();
+  await knexInstance.seed.run();
+}
+
+async function tearDownEnvironment() {
+  await knexInstance.migrate.rollback();
+}
+
+describe('Integration Test', () => {
   describe('Update expense route', () => {
+
+    beforeEach(prepareEnvironment);
+
+    afterEach(tearDownEnvironment);
+
     it('should update an existing expense', async () => {
       // given
-      const createEndpoint = '/expenses/create';
+      const expenseId = faker.random.uuid();
       const updateEndpoint = '/expenses/update';
       const expense = {
         category: 'FOOD',
@@ -16,10 +39,10 @@ describe.only('Integration Test', () => {
         year: '2019',
       };
 
-      const { body: { result: { id } } } = await request(app).post(createEndpoint).send(expense);
+      await knexInstance('expenses').insert({ id: expenseId, ...expense });
 
-      const updatedExpense = { value: '500.00', id };
-      const expectedResult = { result: { ...expense, value: updatedExpense.value, id } };
+      const updatedExpense = { value: '500.00', id: expenseId };
+      const expectedResult = { result: { ...expense, value: updatedExpense.value, id: expenseId } };
 
       // when
       const response = await request(app)
