@@ -5,6 +5,7 @@ const app = require('@app/app.js');
 const knex = require('knex');
 
 const { objectionSettings } = require('@root/infrastructure/config/objection-setup');
+const generateDefaultExpense = require('@test/_fixtures/entities/expense');
 
 let knexInstance;
 
@@ -18,7 +19,7 @@ async function tearDownEnvironment() {
   await knexInstance.migrate.rollback();
 }
 
-describe('Integration Test', () => {
+describe.only('Integration Test', () => {
   describe('Create expense route', () => {
 
     beforeEach(prepareEnvironment);
@@ -27,13 +28,7 @@ describe('Integration Test', () => {
 
     it('should create a expense', async () => {
       // given
-      const expense = {
-        category: 'FOOD',
-        description: 'Padaria',
-        month: '05',
-        value: '300.00',
-        year: '2019',
-      };
+      const expense = generateDefaultExpense();
       const endpoint = '/incomes/create';
       const expectedResult = { result: expense };
 
