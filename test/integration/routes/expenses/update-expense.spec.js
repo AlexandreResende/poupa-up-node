@@ -7,6 +7,7 @@ const faker = require('faker');
 const knex = require('knex');
 
 const { objectionSettings } = require('@root/infrastructure/config/objection-setup');
+const generateDefaultExpense = require('@test/_fixtures/entities/expense');
 
 let knexInstance;
 
@@ -31,18 +32,12 @@ describe('Integration Test', () => {
       // given
       const expenseId = faker.random.uuid();
       const updateEndpoint = '/expenses/update';
-      const expense = {
-        category: 'FOOD',
-        description: 'Padaria',
-        month: '05',
-        value: '300.00',
-        year: '2019',
-      };
+      const expense = generateDefaultExpense({ id: expenseId });
+      const expectedResult = { result: { ...expense, value: '500.00' } };
 
-      await knexInstance('expenses').insert({ id: expenseId, ...expense });
+      await knexInstance('expenses').insert({ ...expense });
 
-      const updatedExpense = { value: '500.00', id: expenseId };
-      const expectedResult = { result: { ...expense, value: updatedExpense.value, id: expenseId } };
+      const updatedExpense = { value: expectedResult.result.value, id: expenseId };
 
       // when
       const response = await request(app)
@@ -50,9 +45,11 @@ describe('Integration Test', () => {
         .send(updatedExpense);
 
       // then
+      expectedResult.result.createdAt = response.body.result.createdAt;
+      expectedResult.result.lastUpdatedAt = response.body.result.lastUpdatedAt;
       expect(response.status).to.be.equal(200);
       expect(response).to.be.json;
-      expect(response.body).to.be.like(expectedResult);
+      expect(response.body).to.be.deep.equal(expectedResult);
     });
 
     it('should throw an error when an empty body is passed', async () => {

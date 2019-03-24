@@ -7,6 +7,7 @@ const faker = require('faker');
 const knex = require('knex');
 
 const { objectionSettings } = require('@root/infrastructure/config/objection-setup');
+const generateDefaultExpense = require('@test/_fixtures/entities/expense');
 
 let knexInstance;
 
@@ -30,18 +31,11 @@ describe('Integration Test', () => {
     it('should get all expenses', async () => {
       // given
       const getExpensesEndpoint = '/expenses/get-expenses';
-      const expense = {
-        category: 'FOOD',
-        description: 'Padaria',
-        month: '05',
-        value: '300.00',
-        year: '2019',
-      };
       const expectedLength = 3;
 
-      await knexInstance('expenses').insert({ id: faker.random.uuid(), ...expense });
-      await knexInstance('expenses').insert({ id: faker.random.uuid(), ...expense, month: '06' });
-      await knexInstance('expenses').insert({ id: faker.random.uuid(), ...expense, month: '07' });
+      await knexInstance('expenses').insert(generateDefaultExpense({ id: faker.random.uuid() }));
+      await knexInstance('expenses').insert(generateDefaultExpense({ id: faker.random.uuid() }));
+      await knexInstance('expenses').insert(generateDefaultExpense({ id: faker.random.uuid() }));
 
       // when
       const response = await request(app)
@@ -55,20 +49,12 @@ describe('Integration Test', () => {
 
     it('should return specific expenses of a determined month and year', async () => {
       // given
-      const createEndpoint = '/expenses/create';
       const getExpensesEndpoint = '/expenses/get-expenses?month=11&year=2019';
-      const expense = {
-        category: 'FOOD',
-        description: 'Padaria',
-        month: '05',
-        value: '300.00',
-        year: '2019',
-      };
       const expectedLength = 1;
 
-      await knexInstance('expenses').insert({ id: faker.random.uuid(), ...expense });
-      await knexInstance('expenses').insert({ id: faker.random.uuid(), ...expense, month: '06' });
-      await knexInstance('expenses').insert({ id: faker.random.uuid(), ...expense, month: '11' });
+      await knexInstance('expenses').insert(generateDefaultExpense({ id: faker.random.uuid(), month: '09' }));
+      await knexInstance('expenses').insert(generateDefaultExpense({ id: faker.random.uuid(), month: '10' }));
+      await knexInstance('expenses').insert(generateDefaultExpense({ id: faker.random.uuid(), month: '11' }));
 
       // when
       const response = await request(app)

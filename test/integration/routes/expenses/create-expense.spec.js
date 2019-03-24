@@ -19,7 +19,7 @@ async function tearDownEnvironment() {
   await knexInstance.migrate.rollback();
 }
 
-describe.only('Integration Test', () => {
+describe('Integration Test', () => {
   describe('Create expense route', () => {
 
     beforeEach(prepareEnvironment);

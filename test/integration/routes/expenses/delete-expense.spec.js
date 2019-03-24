@@ -7,6 +7,7 @@ const faker = require('faker');
 const knex = require('knex');
 
 const { objectionSettings } = require('@root/infrastructure/config/objection-setup');
+const generateDefaultExpense = require('@test/_fixtures/entities/expense');
 
 let knexInstance;
 
@@ -31,15 +32,9 @@ describe('Integration Test', () => {
       // given
       const expenseId = faker.random.uuid();
       const deleteEndpoint = '/expenses/delete';
-      const expense = {
-        category: 'FOOD',
-        description: 'Padaria',
-        month: '05',
-        value: '300.00',
-        year: '2019',
-      };
+      const expense = generateDefaultExpense({ id: expenseId });
 
-      await knexInstance('expenses').insert({ id: expenseId, ...expense });
+      await knexInstance('expenses').insert(expense);
 
       const deletedExpense = { id: expenseId };
       const expectedResult = { result: 1 };
