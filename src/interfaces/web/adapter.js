@@ -9,6 +9,7 @@ module.exports = function adapter(dependencyName) {
 
       response.status(200).json({ result });
     } catch (error) {
+      console.log(error);
       response.status(500).json({
         error: error.message,
       });
