@@ -7,6 +7,7 @@ const faker = require('faker');
 const knex = require('knex');
 
 const { objectionSettings } = require('@root/infrastructure/config/objection-setup');
+const generateDefaultIncome = require('@test/_fixtures/entities/income');
 
 let knexInstance;
 
@@ -20,7 +21,7 @@ async function tearDownEnvironment() {
   await knexInstance.migrate.rollback();
 }
 
-describe('Integration Test', () => {
+describe.only('Integration Test', () => {
   describe('Update income route', () => {
 
     beforeEach(prepareEnvironment);
@@ -31,15 +32,9 @@ describe('Integration Test', () => {
       // given
       const incomeId = faker.random.uuid();
       const updateEndpoint = '/incomes/update';
-      const income = {
-        category: 'FOOD',
-        description: 'Padaria',
-        month: '05',
-        value: '300.00',
-        year: '2019',
-      };
+      const income = generateDefaultIncome({ id: incomeId });
 
-      await knexInstance('incomes').insert({ id: incomeId, ...income });
+      await knexInstance('incomes').insert(income);
 
       const updatedIncome = { value: '500.00', id: incomeId };
       const expectedResult = { result: { ...income, value: updatedIncome.value, id: incomeId } };
@@ -50,6 +45,8 @@ describe('Integration Test', () => {
         .send(updatedIncome);
 
       // then
+      expectedResult.result.createdAt = response.body.result.createdAt;
+      expectedResult.result.lastUpdatedAt = response.body.result.lastUpdatedAt;
       expect(response.status).to.be.equal(200);
       expect(response).to.be.json;
       expect(response.body).to.be.like(expectedResult);

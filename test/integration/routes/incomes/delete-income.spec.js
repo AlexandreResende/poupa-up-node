@@ -8,6 +8,7 @@ const app = require('@app/app.js');
 const knex = require('knex');
 
 const { objectionSettings } = require('@root/infrastructure/config/objection-setup');
+const generateDefaultIncome = require('@test/_fixtures/entities/income');
 
 let knexInstance;
 
@@ -32,15 +33,9 @@ describe('Integration Test', () => {
       // given
       const deleteEndpoint = '/incomes/delete';
       const incomeId = faker.random.uuid();
-      const income = {
-        category: 'FOOD',
-        description: 'Padaria',
-        month: '05',
-        value: '300.00',
-        year: '2019',
-      };
+      const income = generateDefaultIncome({ id: incomeId });
 
-      await knexInstance('incomes').insert({ id: incomeId, ...income });
+      await knexInstance('incomes').insert(income);
 
       const deletedIncome = { id: incomeId };
       const expectedResult = { result: 1 };

@@ -5,6 +5,7 @@ const app = require('@app/app.js');
 const knex = require('knex');
 
 const { objectionSettings } = require('@root/infrastructure/config/objection-setup');
+const generateDefaultIncome = require('@test/_fixtures/entities/income');
 
 let knexInstance;
 
@@ -27,13 +28,7 @@ describe('Integration Test', () => {
 
     it('should create a income', async () => {
       // given
-      const income = {
-        category: 'FOOD',
-        description: 'Padaria',
-        month: '05',
-        value: '300.00',
-        year: '2019',
-      };
+      const income = generateDefaultIncome();
       const endpoint = '/incomes/create';
       const expectedResult = { result: income };
 

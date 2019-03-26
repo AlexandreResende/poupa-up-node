@@ -7,6 +7,7 @@ const faker = require('faker');
 const knex = require('knex');
 
 const { objectionSettings } = require('@root/infrastructure/config/objection-setup');
+const generateDefaultIncome = require('@test/_fixtures/entities/income');
 
 let knexInstance;
 
@@ -27,21 +28,15 @@ describe('Integration Test', () => {
 
     afterEach(tearDownEnvironment);
 
-    it('should delete an existing income', async () => {
+    it('should get all incomes', async () => {
       // given
       const getIncomesEndpoint = '/incomes/get-incomes';
-      const income = {
-        category: 'FOOD',
-        description: 'Padaria',
-        month: '05',
-        value: '300.00',
-        year: '2019',
-      };
+      const income = generateDefaultIncome();
       const expectedLength = 3;
 
       await knexInstance('incomes').insert({ id: faker.random.uuid(), ...income });
-      await knexInstance('incomes').insert({ id: faker.random.uuid(), ...income, month: '06' });
-      await knexInstance('incomes').insert({ id: faker.random.uuid(), ...income, month: '07' });
+      await knexInstance('incomes').insert({ id: faker.random.uuid(), ...income });
+      await knexInstance('incomes').insert({ id: faker.random.uuid(), ...income });
 
       // when
       const response = await request(app)
@@ -56,13 +51,7 @@ describe('Integration Test', () => {
     it('should return specific incomes of a determined month and year', async () => {
       // given
       const getIncomesEndpoint = '/incomes/get-incomes?month=11&year=2019';
-      const income = {
-        category: 'FOOD',
-        description: 'Padaria',
-        month: '05',
-        value: '300.00',
-        year: '2019',
-      };
+      const income = generateDefaultIncome();
       const expectedLength = 1;
 
       await knexInstance('incomes').insert({ id: faker.random.uuid(), ...income });
